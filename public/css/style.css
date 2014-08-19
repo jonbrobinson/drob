@@ -6,6 +6,11 @@ body {
 	font-size: 16px;
 }
 
+form {
+	background: -webkit-gradient(linear, bottom, left 175px, from(#CCCCCC), to(#EEEEEE));
+	background: -moz-linear-gradient(bottom, #CCCCCC, #EEEEEE 175px);
+}
+
 #nav {
 	border: 1px solid;
 	background-color:#222;
