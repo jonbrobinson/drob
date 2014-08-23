@@ -11,34 +11,20 @@ function died ($error) {
 	exit();
 }
 
-function clean_string ($string) {
-	$bad = array("content-type", "bcc", "to", "cc", "href");
-	return str_replace ($bad,"",$string);
-}
-
-$full_name = $_POST['name'];
-$email = $_POST['email'];
-$subject = $_POST['subject'];
-$content = $_POST['content'];
+$name = htmlspecialchars(trim($_POST['name']));
+$email = htmlspecialchars(trim($_POST['email']));
+$subject = htmlspecialchars(trim($_POST['subject']));
+$content = htmlspecialchars(trim($_POST['content']));
 $email_to = "jonbrobinson@gmail.com";
-$email_subject = "Danielle Contact Form";
+$email_subject = "Danielle Contact Form: ";
 
-if(!isset($_POST['name']) || !isset($_POST['email']) || !isset($_POST['subject']) || !isset($_POST['content'])) {
-
-	$email_message = "Form details below. \n\n";
-	$email_message .= "First Name: ".clean_string($full_name)."\n";
-	$email_message .= "Email: ".clean_string($email)."\n";
-	$email_message .= "Subject: ".clean_string($subject)."\n";
-	$email_message .= "Message: ".clean_string($content)."\n";
-
-	// Create Email Headers
-
-	$headers = 'From: '.$email."\r\n".
-	'Reply-To: '.$email."\r\n" .
-	'X-Mailer: PHP/' . phpversion();
-
-	mail($email_to, $email_subject, $email_message, $headers);
-
+if(isset($_POST['name']) && isset($_POST['email']) && isset($_POST['subject']) && isset($_POST['content'])) {
+	$mailgun->sendMessage(MAILGUN_DOMAIN, ['from'    => $email,
+	                                'to'      => $email_to,
+	                                'subject' => $email_subject . $subject,
+	                                'text'    => $content]);
+	header('Location: http://drob.dev');
+	exit();
 } else {
 
 	$error_message = "";
@@ -50,7 +36,7 @@ if(!isset($_POST['name']) || !isset($_POST['email']) || !isset($_POST['subject']
 
 	$string_exp = "/^[A-Za-z .'-]+$/";
 
-	if (!preg_match($string_exp,$full_name)) {
+	if (!preg_match($string_exp,$name)) {
 		$error_message .= 'The Name you entered does not appear to be valid.<br>';
 	}
 
