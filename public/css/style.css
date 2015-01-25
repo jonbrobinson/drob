@@ -38,10 +38,16 @@ input {
 	width:375px;
 	display: block;
 	border:1px solid #999;
-	height: 25px;
+	border-radius: 5px;
+	height: 30px;
 	-webkit-box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.3);
 	-moz-box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.3);
 	box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.3);
+}
+
+::-webkit-input-placeholder {
+	padding-left: 10px;
+	line-height: normal;
 }
 
 input.button {
@@ -66,6 +72,11 @@ textarea {
 	display: block;
 	width:375px;
 	height:100px;
+	border:1px solid #999;
+	border-radius: 5px;
+	-webkit-box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.3);
+	-moz-box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.3);
+	box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.3);
 }
 
 #nav {
@@ -126,4 +137,8 @@ textarea {
 
 #nav ul ul li a:hover {
 	color:#099;
+}
+
+#wrapper_dark {
+	
 }
